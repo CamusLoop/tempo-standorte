@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tempo Facility Services – Bewertung abgeben</title>
+<meta name="description" content="Bewerten Sie Tempo Facility Services auf Google: St. Gallen, Zürich, Frauenfeld oder Chur.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #d2232b;
+    --blue: #007dc5;
+    --ink: #111318;
+    --muted: #5d6470;
+    --line: #e6e8ec;
+    --bg: #ffffff;
+    --card: #ffffff;
+    --card-hover: #fbf5f5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
+  }
+  main { width: 100%; max-width: 440px; margin: 0 auto; flex: 1; }
+
+  .logo { display: block; width: 176px; height: auto; margin: 20px auto 28px; }
+
+  h1 {
+    font-size: clamp(22px, 6vw, 26px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  .sub { margin: 0 0 24px; text-align: center; color: var(--muted); font-size: 15px; }
+
+  .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+
+  .loc {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 16px 16px 18px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .loc::before {
+    content: "";
+    position: absolute; left: 0; top: 14px; bottom: 14px;
+    width: 4px; border-radius: 0 4px 4px 0;
+    background: var(--red);
+  }
+  .loc:hover, .loc:focus-visible { border-color: var(--red); background: var(--card-hover); outline: none; }
+  .loc:active { transform: scale(.985); }
+
+  .city { font-size: 19px; font-weight: 600; line-height: 1.2; }
+  .addr { margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.4; }
+
+  .arrow {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--red); color: #fff; flex: none;
+  }
+  .arrow svg { width: 18px; height: 18px; }
+
+  .tel {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 8px; font-size: 14px; font-weight: 500;
+    color: var(--blue); text-decoration: none;
+  }
+  .tel svg { width: 14px; height: 14px; }
+  .tel:hover { text-decoration: underline; }
+
+  footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 28px; }
+  footer a { color: inherit; }
+
+  @media (prefers-reduced-motion: reduce) { .loc { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="logo.png" alt="Tempo Facility Services AG" width="932" height="300">
+
+  <h1>Wie war Ihre Erfahrung mit uns?</h1>
+  <p class="sub">Wählen Sie Ihren Standort und hinterlassen Sie uns eine Google-Bewertung. Vielen Dank!</p>
+
+  <ul class="list" id="locations"></ul>
+
+  <footer>
+    <a href="https://www.tempo-fs.ch" rel="noopener">tempo-fs.ch</a> · Tempo Facility Services AG
+  </footer>
+</main>
+
+<script>
+  // ─────────────────────────────────────────────────────────────
+  //  EDIT HERE: one entry per location.
+  //  "url" is where the big button sends the visitor.
+  //  Currently: the Google review form for each location
+  //  (search.google.com/local/writereview?placeid=...).
+  // ─────────────────────────────────────────────────────────────
+  const LOCATIONS = [
+    {
+      city: "St. Gallen",
+      address: "Rorschacherstrasse 152, 9000 St. Gallen",
+      phone: "071 244 33 33",
+      url: "https://search.google.com/local/writereview?placeid=ChIJ_1V8nVgem0cR9GlE1z1FopI"
+    },
+    {
+      city: "Zürich",
+      address: "Thurgauerstrasse 117, 8152 Glattpark (Opfikon)",
+      phone: "043 811 45 45",
+      url: "https://search.google.com/local/writereview?placeid=ChIJURt31IIKkEcRFIll1N67BC0"
+    },
+    {
+      city: "Frauenfeld",
+      address: "Hungerbüelstrasse 22, 8501 Frauenfeld",
+      phone: "052 724 93 80",
+      url: "https://search.google.com/local/writereview?placeid=ChIJa3VTBeqRmkcRQrIj82fmXDk"
+    },
+    {
+      city: "Chur",
+      address: "Bahnhofstrasse 44, 7000 Chur",
+      phone: "0800 44 33 33",
+      url: "https://search.google.com/local/writereview?placeid=ChIJcxyu6iLHhEcROTH23Qxmn7E"
+    }
+  ];
+
+  const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  const phoneIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2z"/></svg>';
+
+  const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const ul = document.getElementById("locations");
+  ul.innerHTML = LOCATIONS.map(l => `
+    <li>
+      <a class="loc" href="${esc(l.url)}" rel="noopener">
+        <div>
+          <div class="city">${esc(l.city)}</div>
+          <div class="addr">${esc(l.address)}</div>
+          <span class="tel" data-tel="${esc(l.phone.replace(/\s/g, ""))}">${phoneIcon}${esc(l.phone)}</span>
+        </div>
+        <span class="arrow" aria-hidden="true">${arrow}</span>
+      </a>
+    </li>`).join("");
+
+  // Phone number opens the dialer without triggering the card link.
+  ul.addEventListener("click", e => {
+    const tel = e.target.closest(".tel");
+    if (!tel) return;
+    e.preventDefault();
+    e.stopPropagation();
+    location.href = "tel:+41" + tel.dataset.tel.replace(/^0/, "");
+  });
+</script>
+</body>
+</html>
